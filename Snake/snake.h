@@ -15,7 +15,7 @@ enum{
 
 enum {
     MAX_TAIL_SIZE = 100,
-    START_TAIL_SIZE =3,
+    START_TAIL_SIZE = 30,
     MAX_FOOD_SIZE = 20,
     FOOD_EXPIRE_SECONDS = 10
 };
@@ -33,6 +33,7 @@ struct control_buttons{
  * direction - направление движения
  * tsize - размер хвоста
  * tail - ссылка на хвост
+ * control_buttons - кнопки управления
 */
 typedef struct snake_t{
     int x;
@@ -51,10 +52,23 @@ typedef struct tail_t{
     int y;
 } tail_t;
 
+typedef struct food{
+    int x;
+    int y;
+    time_t put_time;
+    char point;
+    uint8_t enable;
+}food_t;
+
 void initTail(tail_t t[], size_t size);
 void initHead(snake_t *head, int x, int y);
 void initSnake(snake_t *head, size_t size, int x, int y);
 void go(snake_t* snake);
 void goTail(snake_t* snake);
 void changeDirection(snake_t* snake, const int32_t key);
+int isCrush(snake_t *snake);
+void initFood(food_t f[], size_t size);
+void putFoodSeed(food_t *fp);
+void putFood(food_t f[], size_t number_seeds);
+void refreshFood(food_t f[], int nfood);
 #endif //SNAKE_H
