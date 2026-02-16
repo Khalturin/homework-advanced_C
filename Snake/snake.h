@@ -5,6 +5,8 @@
 
 #define MIN_Y 2
 
+#define CONTROLS 2
+
 enum{
     LEFT = 1,
     UP,
@@ -41,7 +43,7 @@ typedef struct snake_t{
     int direction;
     size_t tsize;
     struct tail_t *tail;
-    struct control_buttons controls;
+    struct control_buttons controls[CONTROLS];
 } snake_t;
 
 /*

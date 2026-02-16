@@ -3,7 +3,8 @@
 #include "snake.h"
 
 
-struct control_buttons default_controls = {KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT};
+// struct control_buttons default_controls = {KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT};
+struct control_buttons default_controls[CONTROLS] = {'s', 'w', 'a', 'd', 'S', 'W', 'A', 'D'};
 
 /*
  * Инициализация хвоста
@@ -34,7 +35,8 @@ void initSnake(snake_t *head, size_t size, int x, int y){
     initHead(head, x, y);
     head->tail = tail; // прикрепляем к голове хвост
     head->tsize = size + 1;
-    head->controls = default_controls;
+    for(int i = 0; i < CONTROLS; i++)
+        head->controls[i] = default_controls[i];
 }
 
 int isCrush(snake_t *snake){
@@ -98,10 +100,16 @@ void goTail(snake_t* snake){
 }
 
 void changeDirection(snake_t* snake, const int32_t key){
-    if(key == snake->controls.down && snake->direction != UP)    snake->direction = DOWN;
-    if(key == snake->controls.up && snake->direction != DOWN)    snake->direction = UP;
-    if(key == snake->controls.right && snake->direction != LEFT) snake->direction = RIGHT;
-    if(key == snake->controls.left && snake->direction != RIGHT) snake->direction = LEFT;   
+    for(int i = 0; i < CONTROLS; i++){
+        if(key == snake->controls[i].down && snake->direction != UP)    snake->direction = DOWN;
+        if(key == snake->controls[i].up && snake->direction != DOWN)    snake->direction = UP;
+        if(key == snake->controls[i].right && snake->direction != LEFT) snake->direction = RIGHT;
+        if(key == snake->controls[i].left && snake->direction != RIGHT) snake->direction = LEFT;   
+    }
+    // if(key == snake->controls.down && snake->direction != UP)    snake->direction = DOWN;
+    // if(key == snake->controls.up && snake->direction != DOWN)    snake->direction = UP;
+    // if(key == snake->controls.right && snake->direction != LEFT) snake->direction = RIGHT;
+    // if(key == snake->controls.left && snake->direction != RIGHT) snake->direction = LEFT;   
 }
 
 // void initFood(food_t f[], size_t size){
