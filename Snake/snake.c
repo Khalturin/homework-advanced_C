@@ -249,7 +249,7 @@ void update(snake_t *head, food_t food[], const int32_t key){
 // }
 
 void setColor(COLOR_TYPES color){
-    for(int i = 0; i < CFULL; i++){
+    for(int i = CGREEN; i < CFULL; i++){
         attroff(COLOR_PAIR(i));
     }
     attron(COLOR_PAIR(color));

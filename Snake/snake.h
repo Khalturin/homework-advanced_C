@@ -31,6 +31,7 @@ typedef enum{
 }CONTROL_TYPE;
 
 typedef enum{
+    CNONE,
     CGREEN,
     CRED,
     CYELLOW,
